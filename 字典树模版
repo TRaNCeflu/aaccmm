@@ -1,0 +1,48 @@
+TrieNode* createTrieNode(){ //其实就是创建根节点 
+    TrieNode* node = (TrieNode *)malloc(sizeof(TrieNode));  
+    node->count = 0;  
+    node->exist = false;  
+    memset(node->next , 0 , sizeof(node->next));    // 初始化为空指针  
+    return node;  
+}  
+
+void Trie_insert(Trie root, char* word){  
+    Trie node = root;  
+    char *p = word;  
+    int id;  
+    while( *p ){  
+        id = *p - 'a';  
+        if(node->next[id] == NULL){  
+            node->next[id] = createTrieNode();  
+        }  
+        node = node->next[id];  // 每插入一步，相当于有一个新串经过，指针向下移动  
+        ++p;  
+        node->count += 1;      // 这行代码用于统计每个单词前缀出现的次数（也包括统计每个单词出现的次数）  
+    }  
+    node->exist = true;        // 单词结束的地方标记此处可以构成一个单词  
+}  
+
+void createTrie(char *str)
+{
+  int len = strlen(str);
+  Trie *p = &root, *q;
+  for(int i = 0; i < len; i++)
+  {
+    int id = str[i]-'a';
+    if(p->next[id] == NULL)
+    {
+      q = (Trie *)malloc(sizeof(root));
+      q->v = 1;//初始v==1
+      for(int j = 0; j < MAXN; j++)
+        q->next[j] = NULL;
+      p->next[id] = q;
+      p = p->next[id];
+    }
+    else
+    {
+      p->next[id]->v++;
+      p = p->next[id];
+    }
+  }
+  // p->v = -1;//若为结尾，则将v改成-1表示
+}
