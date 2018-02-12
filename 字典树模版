@@ -1,3 +1,4 @@
+
 TrieNode* createTrieNode(){ //其实就是创建根节点 
     TrieNode* node = (TrieNode *)malloc(sizeof(TrieNode));  
     node->count = 0;  
@@ -22,6 +23,7 @@ void Trie_insert(Trie root, char* word){
     node->exist = true;        // 单词结束的地方标记此处可以构成一个单词  
 }  
 
+//简单实现：：：
 void createTrie(char *str)
 {
   int len = strlen(str);
